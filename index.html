@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кусь Рецепти</title>
+    <style>
+        /* Стилі за макетом Figma */
+        :root {
+            --orange: #ff9f43;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Montserrat Alternates';
+            margin: 0;
+            color: var(--text);
+            background: #f9f9f9;
+        }
+
+        /* Шапка */
+        header {
+            background: var(--orange);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        /* Головна сторінка */
+        .hero {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            margin: 20px 50px;
+            border-radius: 10px;
+        }
+
+            .hero img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.6);
+            padding: 20px 40px;
+            color: white;
+            width: 80%;
+            text-align: center;
+        }
+
+        .recipe-grid {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 50px;
+            gap: 20px;
+        }
+
+        .card {
+            width: 30%;
+        }
+
+            .card img {
+                width: 100%;
+                border-radius: 8px;
+            }
+
+            .card h3 {
+                font-size: 16px;
+                margin: 10px 0 5px;
+            }
+
+            .card p {
+                font-size: 14px;
+                color: #666;
+                margin: 0;
+            }
+
+        /* Про нас */
+        .about-section {
+            display: flex;
+            padding: 50px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-img {
+            flex: 1;
+        }
+
+            .about-img img {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+        .btn-orange {
+            background: var(--orange);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Контакти */
+        .contact-section {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        section {
+            display: none;
+        }
+            /* Для імітації перемикання */
+            section:target {
+                display: block;
+            }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Кусь рецепти</div>
+        <nav>
+            <a href="#home">Головна</a>
+            <a href="#about">Про нас</a>
+            <a href="#contact">Контакти</a>
+        </nav>
+    </header>
+
+    <!-- СТОРІНКА ГОЛОВНА -->
+    <section id="home">
+        <div class="hero">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000" alt="Food">
+            <div class="hero-overlay">
+                <h1>Смачні рецепти на кожен день</h1>
+            </div>
+        </div>
+        <div class="recipe-grid">
+            <div class="card">
+                <img src="file:///C:\users\nastr\Desktop\recipe-project\img\Rectangle 3.png">
+                <h3>Назва страви</h3><p>15 хв</p>
+            </div>
+            <div class="card">
+                <img src="file:///C:\users\nastr\Desktop\recipe-project\img\Rectangle 3.png">
+                <h3>Назва страви</h3><p>15 хв</p>
+            </div>
+            <div class="card">
+                <img src="file:///C:\users\nastr\Desktop\recipe-project\img\Rectangle 3.png">
+                <h3>Назва страви</h3><p>15 хв</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- СТОРІНКА ПРО НАС -->
+    <section id="about">
+        <div class="about-section">
+            <div class="about-text">
+                <h2>Ми готуємо, ти кусаєш!</h2>
+                <p>Кусь-Рецепти — це проект для тих, хто не хоче витрачати життя на плиту. Ми збираємо рецепти, які займають не більше 15 хвилин, коштують як чашка кави і виходять з першого разу. Наша місія: ситий студент — щасливий студент!</p>
+                <button class="btn-orange">Почати готувати</button>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600" alt="Cooking">
+            </div>
+        </div>
+    </section>
+
+    <!-- СТОРІНКА КОНТАКТИ -->
+    <section id="contact">
+        <div class="contact-section">
+            <h2>Залишилися питання?</h2>
+            <div class="contact-form">
+                <input type="text" placeholder="Твоє ім'я">
+                <input type="text" placeholder="Твій Email">
+                <textarea placeholder="Твій рецепт" rows="5"></textarea>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
