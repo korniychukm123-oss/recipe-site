@@ -3,207 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кусь рецепти</title>
+    <title>Кусь Рецепти</title>
     <style>
-        /* CSS Стилі (Етап 4) */
         :root {
-            --main-orange: #fca34d;
-            --bg-white: #ffffff;
-            --text-dark: #333333;
+            --orange: #fca34d;
+            --white: #ffffff;
+            --dark: #333;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: var(--text-dark);
+            background: #fdfdfd;
+            overflow-x: hidden;
         }
 
-        /* Шапка сайту */
+        /* Навігація */
         header {
-            background-color: var(--main-orange);
+            background: var(--orange);
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .logo {
-            font-size: 24px;
+        .logo { font-size: 22px; font-weight: bold; cursor: pointer; }
+        nav button {
+            background: none;
+            border: none;
             font-weight: bold;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
-            margin-left: 20px;
+            cursor: pointer;
+            margin-left: 10px;
             font-size: 14px;
         }
 
-        /* Головний банер */
+        /* Секції (сторінки) */
+        section {
+            display: none; /* Всі сторінки приховані за замовчуванням */
+            padding: 20px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        section.active { display: block; } /* Тільки активна сторінка видима */
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Головна */
         .hero {
             position: relative;
-            height: 300px;
-            margin: 20px 40px;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
+            margin-bottom: 30px;
         }
 
-        .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
+        .hero img { width: 100%; height: auto; display: block; }
         .hero-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 20px 60px;
-            border-radius: 5px;
-            text-align: center;
+            background: rgba(0,0,0,0.6);
+            color: white; padding: 15px; text-align: center; width: 80%;
         }
 
-        /* Картки рецептів */
         .recipe-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            padding: 20px 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .card {
-            text-align: left;
+        .card { cursor: pointer; text-align: center; }
+        .card img { width: 100%; border-radius: 10px; transition: 0.3s; }
+        .card img:hover { transform: scale(1.03); }
+
+        /* Рецепти та Текст */
+        .recipe-page { max-width: 800px; margin: auto; }
+        .recipe-page img { width: 100%; border-radius: 15px; margin: 20px 0; }
+        
+        .btn-back {
+            background: #eee; border: none; padding: 8px 15px;
+            border-radius: 5px; cursor: pointer; margin-bottom: 10px;
         }
 
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 5px;
+        .btn-action {
+            background: var(--orange); border: none; padding: 12px 25px;
+            border-radius: 8px; font-weight: bold; cursor: pointer;
+            display: inline-block; margin-top: 15px;
         }
 
-        /* Секція "Про нас" */
-        .about-section {
-            display: flex;
-            padding: 50px 40px;
-            gap: 40px;
-            align-items: center;
-        }
+        /* Форма */
+        input, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; }
 
-        .about-content {
-            flex: 1;
-        }
-
-        .about-image {
-            flex: 1;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        /* Форма контактів */
-        .contact-section {
-            padding: 50px 40px;
-            text-align: center;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        /* Кнопки */
-        .btn {
-            background-color: var(--main-orange);
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            color: var(--text-dark);
-        }
-
-        @media (max-width: 768px) {
-            .recipe-grid, .about-section {
-                grid-template-columns: 1fr;
-                flex-direction: column;
-            }
-        }
+        /* Адаптивність зображень */
+        img { max-width: 100%; height: auto; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Кусь рецепти</div>
+        <div class="logo" onclick="showPage('home')">Кусь рецепти</div>
         <nav>
-            <a href="#home">Головна</a>
-            <a href="#about">Про нас</a>
-            <a href="#contact">Контакти</a>
+            <button onclick="showPage('home')">Головна</button>
+            <button onclick="showPage('about')">Про нас</button>
+            <button onclick="showPage('contact')">Контакти</button>
         </nav>
     </header>
 
-    <main id="home">
-        <section class="hero">
-            <img src="https://i.postimg.cc/7PjJfP03/Rectangle-2.png" alt="Смачна їжа">
-            <div class="hero-overlay">
-                <h1>Смачні рецепти на кожен день</h1>
-            </div>
-        </section>
-
-        <section class="recipe-grid">
-            <div class="card">
-                <img src="https://i.postimg.cc/HLPsR3t3/Rectangle-3.png" alt="Млинці">
+    <section id="home" class="active">
+        <div class="hero">
+            <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?q=80&w=1000" alt="Банер">
+            <div class="hero-overlay"><h1>Смачні рецепти на кожен день</h1></div>
+        </div>
+        <div class="recipe-grid">
+            <div class="card" onclick="showPage('recipe-pancakes')">
+                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?q=80&w=400" alt="Млинці">
                 <p>Млинці <br><small>15 хв</small></p>
             </div>
-            <div class="card">
-                <img src="https://i.postimg.cc/sxCyCLG5/Rectangle-7.png" alt="Бургер">
+            <div class="card" onclick="showPage('recipe-burger')">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400" alt="Бургер">
                 <p>Бургер <br><small>20 хв</small></p>
             </div>
-            <div class="card">
-                <img src="https://i.postimg.cc/N0yw9t11/Rectangle-8.png" alt="Рамен">
+            <div class="card" onclick="showPage('recipe-ramen')">
+                <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=400" alt="Рамен">
                 <p>Рамен <br><small>25 хв</small></p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="about-section">
-            <div class="about-content">
-                <h2>Ми готуємо, ти кусаєш!</h2>
-                <p>Кусь-Рецепти — це проект для тих, хто не хоче витрачати життя на плиту. Ми збираємо рецепти, які займають не більше 15 хвилин, коштують як чашка кави і виходять з першого разу. Наша місія: ситий студент — щасливий студент!</p>
-                <a href="#" class="btn">Почати готувати</a>
-            </div>
-            <div class="about-image">
-                <img src="https://i.postimg.cc/wT685LXg/unsplash-Chnl-TSkmw9Y.png" alt="Процес готування">
-            </div>
-        </section>
+    <section id="about">
+        <div class="recipe-page">
+            <h2>Ми готуємо, ти кусаєш!</h2>
+            <p>Наш проект створений для швидкого пошуку смачних страв.</p>
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600" alt="Кухня">
+            <br>
+            <button class="btn-action" onclick="showPage('home')">Почати готувати</button>
+        </div>
+    </section>
 
-        <section id="contact" class="contact-section">
+    <section id="contact">
+        <div class="recipe-page">
             <h2>Залишилися питання?</h2>
-            <form class="contact-form">
-                <input type="text" placeholder="Твоє ім'я">
-                <input type="email" placeholder="Твій Email">
-                <textarea rows="5" placeholder="Твій рецепт"></textarea>
-                <button type="submit" class="btn">Відправити</button>
-            </form>
-        </section>
-    </main>
+            <input type="text" placeholder="Твоє ім'я">
+            <input type="email" placeholder="Твій Email">
+            <textarea rows="5" placeholder="Твій рецепт"></textarea>
+            <button class="btn-action">Відправити</button>
+        </div>
+    </section>
 
+    <section id="recipe-pancakes">
+        <div class="recipe-page">
+            <button class="btn-back" onclick="showPage('home')">← Назад</button>
+            <h2>Рецепт: Млинці</h2>
+            <p>Склад: Борошно, молоко, яйця, цукор.</p>
+            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?q=80&w=800" alt="Млинці">
+            <p>Приготування: Змішайте інгредієнти та смажте на пательні до золотої скоринки.</p>
+        </div>
+    </section>
+
+    <section id="recipe-burger">
+        <div class="recipe-page">
+            <button class="btn-back" onclick="showPage('home')">← Назад</button>
+            <h2>Рецепт: Бургер</h2>
+            <p>Склад: Булочка, котлета, сир, овочі.</p>
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800" alt="Бургер">
+            <p>Приготування: Підсмажте котлету, зберіть шари та насолоджуйтесь!</p>
+        </div>
+    </section>
+
+    <section id="recipe-ramen">
+        <div class="recipe-page">
+            <button class="btn-back" onclick="showPage('home')">← Назад</button>
+            <h2>Рецепт: Рамен</h2>
+            <p>Склад: Локшина, бульйон, яйце, норі.</p>
+            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=800" alt="Рамен">
+            <p>Приготування: Зваріть бульйон, додайте локшину та додатки.</p>
+        </div>
+    </section>
+
+    <script>
+        function showPage(pageId) {
+            // Приховуємо всі секції
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            
+            // Показуємо потрібну секцію
+            const activeSection = document.getElementById(pageId);
+            if(activeSection) {
+                activeSection.classList.add('active');
+                window.scrollTo(0, 0); // Прокрутка вгору при зміні сторінки
+            }
+        }
+    </script>
 </body>
 </html>
